@@ -86,3 +86,13 @@ manual_bin <- function(df, yname, xname, cuts) {
                               MV_Cnt = bin_summ$mis_cnt, Bad_Freq = bin_summ$bcnt, Bad_Rate = round(bin_summ$brate, 2),
                               WoE = round(bin_summ$woe, 4), InfoValue = round(bin_summ$iv, 4), KS_Stat = round(bin_summ$ks, 2)))
 }
+
+# SAMPLE OUTPUT:
+#  Bin                           Rule Frequency Percent MV_Cnt Bad_Freq Bad_Rate     WoE InfoValue KS_Stat
+#1  01                       $X <= 82       814    0.14      0       81     0.10 -0.8467    0.0764    9.02
+#2  02             $X > 82 & $X <= 91       837    0.14      0      120     0.14 -0.4316    0.0234   14.44
+#3  03             $X > 91 & $X <= 97       811    0.14      0      148     0.18 -0.1436    0.0027   16.35
+#4  04            $X > 97 & $X <= 101       829    0.14      0      181     0.22  0.0806    0.0009   15.18
+#5  05           $X > 101 & $X <= 107       870    0.15      0      206     0.24  0.1855    0.0054   12.26
+#6  06           $X > 107 & $X <= 115       808    0.14      0      197     0.24  0.2241    0.0074    8.95
+#7  07           $X > 115 | is.na($X)       868    0.15      1      263     0.30  0.5229    0.0468    0.00
