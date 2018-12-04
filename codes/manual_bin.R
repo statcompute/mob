@@ -82,8 +82,8 @@ manual_bin <- function(df, yname, xname, cuts) {
   }
   
   return(result <- data.frame(Bin = bin_summ$bin, Rule = format(bin_summ$rule, width = 30, justify = "right"),
-                              Frequency = bin_summ$cnt, Percent = round(bin_summ$dist, 4),
-                              MV_Cnt = bin_summ$mis_cnt, Bad_Freq = bin_summ$bcnt, Bad_Rate = round(bin_summ$brate, 2),
+                              Frequency = bin_summ$cnt, Percent = round(bin_summ$dist, 2),
+                              MV_Cnt = bin_summ$mis_cnt, Bad_Freq = bin_summ$bcnt, Bad_Rate = round(bin_summ$brate, 4),
                               WoE = round(bin_summ$woe, 4), InfoValue = round(bin_summ$iv, 4), KS_Stat = round(bin_summ$ks, 2)))
 }
 
