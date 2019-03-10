@@ -1,5 +1,5 @@
 ### import an utility function manual_bin() ###
-source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")
+# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")
 
 mono_bin <- function(data, y, x) {
   yname <- deparse(substitute(y))
