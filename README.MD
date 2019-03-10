@@ -1,1 +1,1 @@
-#### Monotonic Binning in Scorecard Development
+#### Monotonic Binning for Scorecard Development
