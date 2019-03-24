@@ -1,11 +1,9 @@
-### import an utility function manual_bin() ###
-# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")
-
 mono_bin <- function(data, y, x) {
 # data: input dataframe
 # y   : name of Y in the input dataframe
 # x   : name of X in the input dataframe
 # 
+# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")  
 # source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/mono_bin.R")
 # mono_bin(df, bad, ltv)
 # $df
