@@ -22,7 +22,7 @@ calc_woe <- function(data, x, spec) {
              split(df1, df1$wbin)))
   
   ### MERGE THE SPEC TABLE AND THE WOE SUMMARY TABLE ###
-  sm2 <- merge(spec[, c("bin", "rule", "dist", "woe")], sm1, by = c("bin", "bin"), full = T)
+  sm2 <- merge(spec[, c("bin", "rule", "dist", "woe")], sm1, by = c("bin"), full = T)
   sm2$psi <- round((sm2$cal_dist - sm2$dist) * log(sm2$cal_dist / sm2$dist), 4)
   df1$wbin <- NULL
   return(list(df = df1, psi = sm2));
