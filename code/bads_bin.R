@@ -43,6 +43,6 @@ bads_bin <- function(data, y, x) {
     nbin <- nbin - 1
   }
 
-  return(list(df = manual_bin(data, yname, xname, cuts = cuts[c(-1, -length(cuts))]),
+  return(list(df   = manual_bin(data, yname, xname, cuts = cuts[c(-1, -length(cuts))]),
               cuts = cuts[c(-1, -length(cuts))]))
 }
