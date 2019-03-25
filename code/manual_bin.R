@@ -111,7 +111,7 @@ manual_bin <- function(df, yname, xname, cuts) {
   return(data.frame(bin      = format(bin_summ$bin, width = 5, justify = "right"),
                     rule     = format(bin_summ$rule, width = 30, justify = "right"),
                     freq     = bin_summ$cnt,
-                    dist     = round(bin_summ$dist, 2),
+                    dist     = round(bin_summ$dist, 4),
                     mv_cnt   = bin_summ$mis_cnt,  
                     bad_freq = bin_summ$bcnt,
                     bad_rate = round(bin_summ$brate, 4),
