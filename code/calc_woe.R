@@ -17,7 +17,7 @@ calc_woe <- function(data, x, spec) {
   sm1 <- Reduce(rbind,
            Map(function(x) data.frame(bin      = unique(x$wbin),
                                       cal_freq = nrow(x),
-                                      cal_dist = round(nrow(x) / nrow(df1), 2),
+                                      cal_dist = round(nrow(x) / nrow(df1), 4),
                                       cal_woe  = mean(x[[wname]])),
              split(df1, df1$wbin)))
   
