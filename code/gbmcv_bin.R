@@ -1,10 +1,10 @@
-gbm_bin <- function(data, y, x) {
+gbmcv_bin <- function(data, y, x) {
 # data: input dataframe
 # y   : name of Y in the input dataframe
 # x   : name of X in the input dataframe
 #
 # source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")
-# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/gbm_bin.R")
+# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/gbmcv_bin.R")
 # gbm_bin(df, bad, ltv)
 # $df
 #    bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
