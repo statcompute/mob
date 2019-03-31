@@ -3,7 +3,7 @@
 
 This reposity hosts a collection of R functions that would generate the monotonice binning employed in consumer credit scorecard developments. 
 
-The function [manual_bin()](https://github.com/statcompute/MonotonicBinning/blob/master/code/manual_bin.R) is the building block of all binning algorithms introduced here and will generate the binning outcome based upon a list of cutting points for each attribute. 
+The function [manual_bin()](https://github.com/statcompute/MonotonicBinning/blob/master/code/manual_bin.R) is the building block of all binning algorithms introduced here and will generate the binning outcome based upon a list of cutting points for each numeric attribute. If there is any missing value in the attribute, two different treatments should be considered, depending on the ratio between good and bad accounts. With only good or only bad accounts in missing values, then all cases with missing values should be merged into a category with the similar bad rate. With both good and bad acounts in missing values, then all cases with missing values should be treated as a standalone category. 
 
 ```r
 manual_bin(df, "bad", "tot_derog", c(1, 2))
