@@ -1,2 +1,2 @@
 
-<center> ###Monotonic Optimal Binning for Consumer Credit Risk Scorecard Development </center>
+### <center> Monotonic Optimal Binning for Consumer Credit Risk Scorecard Development </center>
