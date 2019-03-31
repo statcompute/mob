@@ -1,3 +1,2 @@
-
 #### <p align="center"> Monotonic Optimal Binning </p>
-#### <center>  for Consumer Credit Risk Scorecard Development </center>
+##### <p align="center">  for Consumer Credit Risk Scorecard Development </p>
