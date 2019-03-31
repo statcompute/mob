@@ -3,4 +3,4 @@
 
 This reposity hosts a collection of R functions that would generate the monotonice binning employed in consumer credit scorecard developments. 
 
-⋅⋅* Unordered sub-list
+The function [manual_bin()](https://github.com/statcompute/MonotonicBinning/blob/master/code/manual_bin.R)
