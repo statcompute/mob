@@ -42,7 +42,7 @@ gbmcv_bin <- function(data, y, x) {
                                     yavg = mean(x$y),
                                     yhat = round(mean(x$yhat), 10))))
 
-  cuts <- df4$maxx[2:(nrow(df4) - 2)]
+  cuts <- df4$maxx[2:max(2, (nrow(df4) - 2))]
   return(list(df = manual_bin(data, yname, xname, cuts = cuts), 
               cuts = cuts))  
 }
