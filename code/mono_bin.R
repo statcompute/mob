@@ -1,48 +1,43 @@
 mono_bin <- function(data, y, x) {
+# INPUT
 # data: input dataframe
-# y   : name of Y in the input dataframe
-# x   : name of X in the input dataframe
-# 
-# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")  
-# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/mono_bin.R")
+# y   : name of Y in the input dataframe with 0/1 binary values
+# x   : name of X in the input dataframe with numeric variables
+# OUTPUT
 # mono_bin(df, bad, ltv)
 # $df
-# bin                           rule freq dist mv_cnt bad_freq bad_rate     woe     iv      ks
-#  01                       $X <= 86 1108 0.19      0      122   0.1101 -0.7337 0.0810 11.0448
-#  02             $X > 86 & $X <= 95 1081 0.19      0      166   0.1536 -0.3510 0.0205 16.8807
-#  03            $X > 95 & $X <= 101 1102 0.19      0      242   0.2196  0.0880 0.0015 15.1771
-#  04           $X > 101 & $X <= 106  743 0.13      0      177   0.2382  0.1935 0.0050 12.5734
-#  05           $X > 106 & $X <= 115  935 0.16      0      226   0.2417  0.2126 0.0077  8.9540
-#  06           $X > 115 | is.na($X)  868 0.15      1      263   0.3030  0.5229 0.0468  0.0000
+#   bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
+#    01                       $X <= 84  956 0.1638      0      102   0.1067 -0.7690 0.0759  9.8728
+#    02             $X > 84 & $X <= 93  960 0.1645      0      142   0.1479 -0.3951 0.0227 15.6254
+#   ... SKIPPED ....
+#    06           $X > 109 & $X <= 117  722 0.1237      0      190   0.2632  0.3263 0.0144  7.2169
+#    07           $X > 117 | is.na($X)  729 0.1249      1      218   0.2990  0.5041 0.0364  0.0000
 # $cuts
-# [1]  86  95 101 106 115
+# [1]  84  93  99 103 109 117
 
-  ### GET THE DATA READY ###
+  ### GET THINGS READY ###
   yname <- deparse(substitute(y))
   xname <- deparse(substitute(x))  
-  df1 <- data[!is.na(data[, xname]), c(xname, yname)]  
-  nbin <- min(100, nrow(unique(df1[[xname]])))
-
-  ### A FUNCTION TO CUT A NUMERIC ARRAY INTO INTERVALS ###
-  cut2 <- function(x, g) {
-    c <- unique(quantile(x, probs = seq(0, 1, 1 / g), na.rm = T, names = F, type = 3))
-    return(c(0, rep(1, length(c) - 2), 0) + c)
-  }
+  df1 <- subset(data, !is.na(data[[xname]]) & data[[yname]] %in% c(0, 1), select = c(xname, yname))
+  nbin <- round(1 / max(table(df1[[xname]]) / length(df1[[xname]])))
  
   ### BIN THE DATAFRAME ITERATIVELY UNTIL THE FIRST OCCURRENCE OF THE BREAK CONDITION ###
   repeat {
-    cuts <- cut2(df1[[xname]], nbin)
+    cuts <- Hmisc::cut2(df1[[xname]], g = nbin, onlycuts = T)
     df1$cut <- cut(df1[[xname]], breaks = cuts, include.lowest = T)    
     df2 <- Reduce(rbind, 
-             Map(function(x) data.frame(xmean = mean(x[[xname]], na.rm = T), 
-                                        ymean = mean(x[[yname]], na.rm = T)), 
+             Map(function(x) data.frame(xmean = mean(x[[xname]]), 
+                                        ymean = mean(x[[yname]])), 
                split(df1, df1$cut)))
-    if(abs(cor(df2$xmean, df2$ymean, method = "spearman")) == 1 | nrow(df2) == 2) {
-      break
+
+    if(round(abs(cor(df2$xmean, df2$ymean, method = "spearman", use = "complete.obs")), 8) == 1) {
+      if(max(df2$ymean) < 1 & min(df2$ymean) > 0) {
+        break
+      }
     }    
     nbin <- nbin - 1
   }
-
+  
   return(list(df   = manual_bin(data, yname, xname, cuts = cuts[c(-1, -length(cuts))]), 
               cuts = cuts[c(-1, -length(cuts))]))
 }
