@@ -1,28 +1,24 @@
 gbm_bin <- function(data, y, x) {
-### PARAMETERS ###   
+# INPUT   
 # data: input dataframe
-# y   : name of Y in the input dataframe
-# x   : name of X in the input dataframe
-### HOW TO USE ###
-# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/manual_bin.R")
-# source("https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/gbm_bin.R")
-# gbm_bin(df, bad, tot_derog)
-### OUTPUT ###
+# y   : name of Y in the input dataframe with binary 0/1 values
+# x   : name of X in the input dataframe with numeric values
+# OUTPUT
+# gbm_bin(df, bad, ltv)
 # $df
 #   bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
-#    00                      is.na($X)  213 0.0365    213       70   0.3286  0.6416 0.0178  2.7716
-#    01                        $X <= 1 3741 0.6409      0      560   0.1497 -0.3811 0.0828 18.9469
-#    02               $X > 1 & $X <= 2  478 0.0819      0      121   0.2531  0.2740 0.0066 16.5222
-#    03               $X > 2 & $X <= 3  332 0.0569      0       86   0.2590  0.3050 0.0058 14.6321
-#    04               $X > 3 & $X <= 9  848 0.1453      0      282   0.3325  0.6593 0.0750  3.2492
-#    05                         $X > 9  225 0.0385      0       77   0.3422  0.7025 0.0228  0.0000
+#    01                       $X <= 71  393 0.0673      0       31   0.0789 -1.1017 0.0574  5.2081
+#    02             $X > 71 & $X <= 72   22 0.0038      0        2   0.0909 -0.9466 0.0025  5.4718
+#   ...SKIPPED...
+#    14           $X > 115 & $X <= 136  774 0.1326      0      226   0.2920  0.4702 0.0333  1.8655
+#    15           $X > 136 | is.na($X)   94 0.0161      1       37   0.3936  0.9238 0.0172  0.0000
 # $cuts
-# [1] 1 2 3 9
+# [1]  71  72  73  81  83  90  94  95 100 101 110 112 115 136
 
   ### GET THINGS READY ###
   yname <- deparse(substitute(y))
   xname <- deparse(substitute(x))
-  df1 <- data[!is.na(data[, xname]), c(xname, yname)]
+  df1 <- subset(data, !is.na(data[[xname]]) & data[[yname]] %in% c(0, 1), select = c(xname, yname))
   df2 <- data.frame(y = df1[[yname]], x = df1[[xname]], x2 = df1[[xname]])
 
   ### DETECT THE CORRELATION DIRRECTION BETWEEN X AND Y ###
@@ -36,13 +32,11 @@ gbm_bin <- function(data, y, x) {
   ### AGGREGATE THE GBM OUTPUT ###
   df4 <- Reduce(rbind, 
            lapply(split(df3, df3$yhat), 
-             function(x) data.frame(minx = min(x$x), 
-                                    maxx = max(x$x),
-                                    nobs = nrow(x),
+             function(x) data.frame(maxx = max(x$x), 
                                     yavg = mean(x$y),
-                                    yhat = round(mean(x$yhat), 10))))
+                                    yhat = round(mean(x$yhat), 8))))
   
-  cuts <- df4$maxx[2:max(2, (nrow(df4) - 2))]
+  cuts <- sort(df4$maxx[2:max(2, (nrow(df4) - 2))])
   return(list(df = manual_bin(data, yname, xname, cuts = cuts), 
               cuts = cuts))  
 }
