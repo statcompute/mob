@@ -2,7 +2,7 @@ mono_bin <- function(data, y, x) {
 # INPUT
 # data: input dataframe
 # y   : name of Y in the input dataframe with 0/1 binary values
-# x   : name of X in the input dataframe with numeric variables
+# x   : name of X in the input dataframe with numeric values
 # OUTPUT
 # mono_bin(df, bad, ltv)
 # $df
