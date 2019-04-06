@@ -30,9 +30,12 @@ pava_bin <- function(data, y, x) {
   df3 <- Reduce(rbind, 
            lapply(split(df2, df2$yhat), 
              function(x) data.frame(maxx = max(x$x), 
+                                    yavg = mean(x$y),
                                     yhat = round(mean(x$yhat), 8))))
 
-  cuts <- df3$maxx[2:(nrow(df3) - 2)]
+  h <- ifelse(abs(df3[["yavg"]][1]) %in% c(0, 1), 2, 1)
+  t <- ifelse(abs(df3[["yavg"]][nrow(df3)]) %in% c(0, 1), 2, 1)
+  cuts <- df3$maxx[h:(nrow(df3) - t)]
   return(list(df = manual_bin(data, yname, xname, cuts = cuts), 
               cuts = cuts))
 }
