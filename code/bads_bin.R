@@ -28,7 +28,7 @@ bads_bin <- function(data, y, x) {
     df1$cut <- cut(df1[[xname]], breaks = cuts, include.lowest = T)
     df3 <- Reduce(rbind, 
              Map(function(x) data.frame(xmean = mean(x[[xname]]), 
-			                            ymean = mean(x[[yname]])), 
+                                        ymean = mean(x[[yname]])), 
                split(df1, df1$cut)))
 
     if(round(abs(cor(df3$xmean, df3$ymean, method = "spearman")), 8) == 1) {
