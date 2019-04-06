@@ -7,13 +7,13 @@ gbm_bin <- function(data, y, x) {
 # gbm_bin(df, bad, ltv)
 # $df
 #   bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
-#    01                       $X <= 71  393 0.0673      0       31   0.0789 -1.1017 0.0574  5.2081
-#    02             $X > 71 & $X <= 72   22 0.0038      0        2   0.0909 -0.9466 0.0025  5.4718
+#    01                       $X <= 46   81 0.0139      0        3   0.0370 -1.9021 0.0272  1.4298
+#    02             $X > 46 & $X <= 71  312 0.0535      0       28   0.0897 -0.9608 0.0363  5.2081
 #   ...SKIPPED...
-#    14           $X > 115 & $X <= 136  774 0.1326      0      226   0.2920  0.4702 0.0333  1.8655
-#    15           $X > 136 | is.na($X)   94 0.0161      1       37   0.3936  0.9238 0.0172  0.0000
+#    16           $X > 136 & $X <= 138   27 0.0046      0        9   0.3333  0.6628 0.0024  1.5008
+#    17           $X > 138 | is.na($X)   67 0.0115      1       28   0.4179  1.0246 0.0154  0.0000
 # $cuts
-# [1]  71  72  73  81  83  90  94  95 100 101 110 112 115 136
+# [1]  46  71  72  73  81  83  90  94  95 100 101 110 112 115 136 138
 
   ### GET THINGS READY ###
   yname <- deparse(substitute(y))
@@ -35,8 +35,12 @@ gbm_bin <- function(data, y, x) {
              function(x) data.frame(maxx = max(x$x), 
                                     yavg = mean(x$y),
                                     yhat = round(mean(x$yhat), 8))))
-  
-  cuts <- sort(df4$maxx[2:max(2, (nrow(df4) - 2))])
+
+  df5 <- df4[order(df4$maxx), ]
+  h <- ifelse(df5[["yavg"]][1] %in% c(0, 1), 2, 1)
+  t <- ifelse(df5[["yavg"]][nrow(df5)] %in% c(0, 1), 2, 1)
+  cuts <- df5$maxx[h:max(h, (nrow(df5) - t))]
+
   return(list(df = manual_bin(data, yname, xname, cuts = cuts), 
               cuts = cuts))  
 }
