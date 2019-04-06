@@ -27,15 +27,17 @@ pava_bin <- function(data, y, x) {
   df2 <- with(isotone::gpava(df1[[xname]], cor / abs(cor) * df1[[yname]], ties = "secondary"), data.frame(x = z, y = y, yhat = x))
 
   ### AGGREGATE THE PAVA OUTPUT ###
-  df3 <- Reduce(rbind, 
-           lapply(split(df2, df2$yhat), 
-             function(x) data.frame(maxx = max(x$x), 
-                                    yavg = mean(x$y),
-                                    yhat = round(mean(x$yhat), 8))))
+  df3 <- Reduce(rbind,
+           lapply(split(df2, df2$yhat),
+             function(x) data.frame(maxx = max(x$x),
+                                    yavg = abs(mean(x$y)),
+                                    yhat = abs(round(mean(x$yhat), 8)))))
 
-  h <- ifelse(abs(df3[["yavg"]][1]) %in% c(0, 1), 2, 1)
-  t <- ifelse(abs(df3[["yavg"]][nrow(df3)]) %in% c(0, 1), 2, 1)
-  cuts <- df3$maxx[h:(nrow(df3) - t)]
+  df4 <- df3[order(df3$maxx), ]  
+  h <- ifelse(abs(df4[["yavg"]][1]) %in% c(0, 1), 2, 1)
+  t <- ifelse(abs(df4[["yavg"]][nrow(df4)]) %in% c(0, 1), 2, 1)
+  cuts <- df4$maxx[h:(nrow(df4) - t)] 
+
   return(list(df = manual_bin(data, yname, xname, cuts = cuts), 
               cuts = cuts))
 }
