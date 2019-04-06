@@ -31,9 +31,12 @@ iso_bin <- function(data, y, x) {
   df4 <- Reduce(rbind, 
            lapply(split(df3, df3$yhat), 
              function(x) data.frame(maxx = max(x$x), 
+                                    yavg = mean(x$y),
                                     yhat = round(mean(x$yhat), 8))))
 
-  cuts <- df4$maxx[2:(nrow(df4) - 2)]
+  h <- ifelse(abs(df4[["yavg"]][1]) %in% c(0, 1), 2, 1)
+  t <- ifelse(abs(df4[["yavg"]][nrow(df4)]) %in% c(0, 1), 2, 1)
+  cuts <- df4$maxx[h:(nrow(df4) - t)]                    
   return(list(df = manual_bin(data, yname, xname, cuts = cuts), 
               cuts = cuts))
 }
