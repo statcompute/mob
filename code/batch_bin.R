@@ -17,7 +17,7 @@ batch_bin <- function(data, method = "mono_bin") {
   bin_fn <- get(method)
 
   xlst <- parallel::mclapply(xnames, mc.cores = parallel::detectCores(), 
-           function(xname) bin_fn(data.frame(y = df1[[yname]], x = df1[[xname]]), y, x))
+            function(xname) bin_fn(data.frame(y = df1[[yname]], x = df1[[xname]]), y, x))
   names(xlst) <- xnames
 
   xsum <- Reduce(rbind, parallel::mclapply(xnames, mc.cores = parallel::detectCores(),
