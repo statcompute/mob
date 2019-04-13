@@ -10,7 +10,6 @@ batch_bin <- function(data, method = "mono_bin") {
 #   ...SKIPPED...
 #   tot_income    6    5 10.2171 0.0677
 
-  ### GET THINGS READY ###
   df1 <- subset(data, data[, ncol(data)] %in% c(0, 1))
   xnames <- colnames(df1)[1:(ncol(df1) - 1)]
   yname <- colnames(df1)[ncol(df1)]
@@ -21,11 +20,15 @@ batch_bin <- function(data, method = "mono_bin") {
   names(xlst) <- xnames
 
   xsum <- Reduce(rbind, parallel::mclapply(xnames, mc.cores = parallel::detectCores(),
-            function(xname) data.frame(var  = xname,
-                                       nbin = nrow(xlst[[xname]]$df),
-                                       miss = sum(xlst[[xname]]$df[["mv_cnt"]]),
-                                       ks   = max(xlst[[xname]]$df[["ks"]]),
-                                       iv   = sum(xlst[[xname]]$df[["iv"]]))))
+            function(xname) data.frame(var    = xname,
+                                       nbin   = nrow(xlst[[xname]]$df),
+                                       unique = length(unique(df1[!is.na(df1[[xname]]), xname])),
+                                       miss   = sum(xlst[[xname]]$df[["mv_cnt"]]),
+                                       min    = min(df1[!is.na(df1[[xname]]), xname]),
+                                       median = median(df1[!is.na(df1[[xname]]), xname]),
+                                       max    = max(df1[!is.na(df1[[xname]]), xname]),
+                                       ks     = max(xlst[[xname]]$df[["ks"]]),
+                                       iv     = sum(xlst[[xname]]$df[["iv"]]))))
 
   BinOut <- list(BinSum = xsum, BinLst = xlst)
   class(BinOut) <- "BinSummary"
