@@ -59,3 +59,20 @@ iso_bin(df, bad, tot_derog)
 # $cuts
 # [1]  0  1  2  3 23
 ```
+
+4. The function **gbm_bin** is driven by the generalized boosted modeling with the monotone restriction. Similar to **iso_bin()**, it also would generate more granular binning outcomes with higher KS and IV statistics. 
+```r
+gbm_bin(df, bad, tot_derog)
+# $df
+#  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
+#   00                      is.na($X)  213 0.0365    213       70   0.3286  0.6416 0.0178  2.7716
+#   01                        $X <= 0 2850 0.4883      0      367   0.1288 -0.5559 0.1268 20.0442
+#   02               $X > 0 & $X <= 1  891 0.1526      0      193   0.2166  0.0704 0.0008 18.9469
+#   03               $X > 1 & $X <= 2  478 0.0819      0      121   0.2531  0.2740 0.0066 16.5222
+#   04               $X > 2 & $X <= 3  332 0.0569      0       86   0.2590  0.3050 0.0058 14.6321
+#   05               $X > 3 & $X <= 9  848 0.1453      0      282   0.3325  0.6593 0.0750  3.2492
+#   06              $X > 9 & $X <= 14  166 0.0284      0       56   0.3373  0.6808 0.0157  0.9371
+#   07                        $X > 14   59 0.0101      0       21   0.3559  0.7629 0.0071  0.0000
+# $cuts
+# [1]  0  1  2  3  9 14
+```
