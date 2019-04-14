@@ -43,3 +43,19 @@ bad_bin(df, bad, tot_derog)
 # $cuts
 # [1] 2 4
 ```
+
+3. The function **iso_bin()** is driven by the isotonic regression and therefore doesn't require the iteration. As a result, the process is much faster and a monotonic outcome is guaranteed. 
+```r
+iso_bin(df, bad, tot_derog)
+# $df
+#  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
+#   00                      is.na($X)  213 0.0365    213       70   0.3286  0.6416 0.0178  2.7716
+#   01                        $X <= 0 2850 0.4883      0      367   0.1288 -0.5559 0.1268 20.0442
+#   02               $X > 0 & $X <= 1  891 0.1526      0      193   0.2166  0.0704 0.0008 18.9469
+#   03               $X > 1 & $X <= 2  478 0.0819      0      121   0.2531  0.2740 0.0066 16.5222
+#   04               $X > 2 & $X <= 3  332 0.0569      0       86   0.2590  0.3050 0.0058 14.6321
+#   05              $X > 3 & $X <= 23 1064 0.1823      0      353   0.3318  0.6557 0.0931  0.4370
+#   06                        $X > 23    9 0.0015      0        6   0.6667  2.0491 0.0090  0.0000
+# $cuts
+# [1]  0  1  2  3 23
+```
