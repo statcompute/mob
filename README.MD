@@ -44,7 +44,7 @@ bad_bin(df, bad, tot_derog)
 # [1] 2 4
 ```
 
-3. The function **iso_bin()** is driven by the isotonic regression and therefore doesn't require the iteration. As a result, the process is much faster and a monotonic outcome is guaranteed. 
+3. The function **iso_bin()** is driven by the isotonic regression and therefore doesn't require the iteration. As a result, the process is much faster and a monotonic outcome is guaranteed. In addition, given a more granular binning outcome, **iso_bin()** is able to deliver results with higher KS and IV. 
 ```r
 iso_bin(df, bad, tot_derog)
 # $df
