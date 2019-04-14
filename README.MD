@@ -94,3 +94,4 @@ As previously demonstrated, above 4 functions can only apply the binning algorit
 |tot_income     |     4|    1639|     5|    0|   3400.0|  8147167|   9.1526|  0.0500|
 ```
 
+If we are specifically interested in the detailed binning outcome of the attribute **tot_income**, then batch_bin(df, 1)$BinLst[["tot_income"]] should do the work. 
