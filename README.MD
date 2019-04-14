@@ -17,7 +17,7 @@ manual_bin(df, "bad", "tot_derog", c(1, 2))
 
 Currently, there are four monotonic binning algorithms supported in the **MOB** package. 
 
-1. The function **qtl_bin()** implements the iterative discretization based on quantiles across the whole data sample. 
+1. The function **qtl_bin()** implements the iterative discretization based on quantiles across the whole data sample. In each iterative step, a convergence criterion of the Spearman Correlation Coefficient equal to 1 or -1 would be evaluated. 
 ```r
 qtl_bin(df, bad, tot_derog)
 # $df
@@ -29,4 +29,17 @@ qtl_bin(df, bad, tot_derog)
 #   04                         $X > 4  818 0.1401      0      269   0.3289  0.6426 0.0685  0.0000
 # $cuts
 # [1] 1 2 4
+```
+
+2. The function **bad_bin()** is a two-step process and implements a revised version of the iterative discretization. The discretization is driven by the data sample with Y = 1 and the discretization outcome is evaluated across the whole data sample based upon the abovementioned convergence criterion. 
+```r
+bad_bin(df, bad, tot_derog)
+# $df
+#  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
+#   00                      is.na($X)  213 0.0365    213       70   0.3286  0.6416 0.0178  2.7716
+#   01                        $X <= 2 4219 0.7228      0      681   0.1614 -0.2918 0.0563 16.5222
+#   02               $X > 2 & $X <= 4  587 0.1006      0      176   0.2998  0.5078 0.0298 10.6623
+#   03                         $X > 4  818 0.1401      0      269   0.3289  0.6426 0.0685  0.0000
+# $cuts
+# [1] 2 4
 ```
