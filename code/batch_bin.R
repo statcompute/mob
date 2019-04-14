@@ -4,12 +4,6 @@ batch_bin <- function(data, method) {
 # method: an integer representing the binning algorithm, currently:
 #         1 for the iteration, 2 for the iteration for bads only
 #         3 for the isotonic regression, 4 for the generalized boosting model
-# OUTPUT
-# batch_bin(df, "mono_bin")
-#          var nbin miss      ks     iv
-#    tot_derog    3  213 18.9469 0.1975
-#   ...SKIPPED...
-#   tot_income    6    5 10.2171 0.0677
 
   if (sum(Reduce(c, Map(is.numeric, data))) < ncol(data)) {
     stop("All variables in the data frame need to be numeric !")
