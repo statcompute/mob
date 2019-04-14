@@ -13,19 +13,14 @@ iso_bin <- function(data, y, x) {
 # $cuts
 # [1]  46  71  72  73  81  83  90  94  95 100 101 110 112 115 136 138
 
-  ### GET THINGS READY ###
   yname <- deparse(substitute(y))
   xname <- deparse(substitute(x))
   df1 <- subset(data, !is.na(data[[xname]]) & data[[yname]] %in% c(0, 1), select = c(xname, yname))
   df2 <- df1[order(df1[[xname]]), ]
-
-  ### DETECT THE CORRELATION DIRRECTION BETWEEN X AND Y ###
   spcor <- cor(df2[, 2], df2[, 1], method = "spearman", use = "complete.obs")
 
-  ### GET THE OUTPUT FROM AN ISOTONIC REGRESSION ###
   df3 <- with(isoreg(df2[[xname]], spcor / abs(spcor) * df2[[yname]]), data.frame(x = x, y = y, yhat = yf))
 
-  ### AGGREGATE THE ISOTONIC REGRESSION OUTPUT ###
   df4 <- Reduce(rbind, 
            lapply(split(df3, df3$yhat), 
              function(x) data.frame(maxx = max(x$x), 
