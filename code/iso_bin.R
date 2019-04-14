@@ -8,9 +8,7 @@ iso_bin <- function(data, y, x) {
 # $df
 #   bin                           rule freq dist mv_cnt bad_freq bad_rate     woe     iv      ks
 #    01                       $X <= 46   81 0.01      0        3   0.0370 -1.9021 0.0272  1.4298
-#    02             $X > 46 & $X <= 71  312 0.05      0       28   0.0897 -0.9608 0.0363  5.2081
 #   ...SKIPPED...
-#    16           $X > 136 & $X <= 138   27 0.00      0        9   0.3333  0.6628 0.0024  1.5008
 #    17           $X > 138 | is.na($X)   67 0.01      1       28   0.4179  1.0246 0.0154  0.0000
 # $cuts
 # [1]  46  71  72  73  81  83  90  94  95 100 101 110 112 115 136 138
@@ -22,10 +20,10 @@ iso_bin <- function(data, y, x) {
   df2 <- df1[order(df1[[xname]]), ]
 
   ### DETECT THE CORRELATION DIRRECTION BETWEEN X AND Y ###
-  cor <- cor(df2[, 2], df2[, 1], method = "spearman", use = "complete.obs")
+  spcor <- cor(df2[, 2], df2[, 1], method = "spearman", use = "complete.obs")
 
   ### GET THE OUTPUT FROM AN ISOTONIC REGRESSION ###
-  df3 <- with(isoreg(df2[[xname]], cor / abs(cor) * df2[[yname]]), data.frame(x = x, y = y, yhat = yf))
+  df3 <- with(isoreg(df2[[xname]], spcor / abs(spcor) * df2[[yname]]), data.frame(x = x, y = y, yhat = yf))
 
   ### AGGREGATE THE ISOTONIC REGRESSION OUTPUT ###
   df4 <- Reduce(rbind, 
