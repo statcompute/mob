@@ -15,6 +15,18 @@ manual_bin(df, "bad", "tot_derog", c(1, 2))
 
 ```
 
-Currently, there are four monotonic binning algorithms implemented in the MOB package. 
+Currently, there are four monotonic binning algorithms supported in the **MOB** package. 
 
-1. The function **qtl_bin()** 
+1. The function **qtl_bin()** implements the iterative discretization based on quantiles across the whole data sample. 
+```r
+qtl_bin(df, bad, tot_derog)
+# $df
+#  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
+#   00                      is.na($X)  213 0.0365    213       70   0.3286  0.6416 0.0178  2.7716
+#   01                        $X <= 1 3741 0.6409      0      560   0.1497 -0.3811 0.0828 18.9469
+#   02               $X > 1 & $X <= 2  478 0.0819      0      121   0.2531  0.2740 0.0066 16.5222
+#   03               $X > 2 & $X <= 4  587 0.1006      0      176   0.2998  0.5078 0.0298 10.6623
+#   04                         $X > 4  818 0.1401      0      269   0.3289  0.6426 0.0685  0.0000
+# $cuts
+# [1] 1 2 4
+```
