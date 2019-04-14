@@ -94,14 +94,14 @@ As previously demonstrated, above 4 functions can only apply the binning algorit
 |tot_income     |     4|    1639|     5|    0|   3400.0|  8147167|   9.1526|  0.0500|
 ```
 
-If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then **batch_bin(df, 1)$BinLst[["tot_income"]]** would deliver the result. 
+If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then **batch_bin(df, 1)$BinLst[["tot_income"]]** would deliver the result as below. 
 ```r
-$df
-    bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv     ks
-1    00                      is.na($X)    5 0.0009      5        1   0.2000 -0.0303 0.0000 0.0026
-2    01                     $X <= 2570 1947 0.3336      0      486   0.2496  0.2553 0.0234 9.1526
-3    02         $X > 2570 & $X <= 4510 1995 0.3418      0      406   0.2035 -0.0086 0.0000 8.8608
-4    03                      $X > 4510 1890 0.3238      0      303   0.1603 -0.2999 0.0266 0.0000
-$cuts
-[1] 2570 4510
+# $df
+#  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv     ks
+#   00                      is.na($X)    5 0.0009      5        1   0.2000 -0.0303 0.0000 0.0026
+#   01                     $X <= 2570 1947 0.3336      0      486   0.2496  0.2553 0.0234 9.1526
+#   02         $X > 2570 & $X <= 4510 1995 0.3418      0      406   0.2035 -0.0086 0.0000 8.8608
+#   03                      $X > 4510 1890 0.3238      0      303   0.1603 -0.2999 0.0266 0.0000
+# $cuts
+# [1] 2570 4510
 ```
