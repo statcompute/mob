@@ -60,7 +60,7 @@ iso_bin(df, bad, tot_derog)
 # [1]  0  1  2  3 23
 ```
 
-4. The function **gbm_bin** is driven by the generalized boosted modeling with the monotone restriction. Similar to **iso_bin()**, it also would generate more granular binning outcomes with higher KS and IV statistics. 
+4. The function **gbm_bin** is driven by the generalized boosted modeling with the monotone restriction. Similar to **iso_bin()**, it also would generate more granular binning outcomes with higher KS and IV statistics, albeit a longer computing time due to the boosting process. 
 ```r
 gbm_bin(df, bad, tot_derog)
 # $df
