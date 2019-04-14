@@ -1,8 +1,9 @@
-batch_bin <- function(data, method = "mono_bin") {
+batch_bin <- function(data, method) {
 # INPUT
 # data  : input dataframe with Y in the last column
-# method: a character string indicating the method used for monotonic binning
-#         one of "mono_bin", "iso_bin", or "gbm_bin"
+# method: an integer representing the binning algorithm, currently:
+#         1 for the iteration, 2 for the iteration for bads only
+#         3 for the isotonic regression, 4 for the generalized boosting model
 # OUTPUT
 # batch_bin(df, "mono_bin")
 #          var nbin miss      ks     iv
@@ -10,10 +11,21 @@ batch_bin <- function(data, method = "mono_bin") {
 #   ...SKIPPED...
 #   tot_income    6    5 10.2171 0.0677
 
+  if (sum(Reduce(c, Map(is.numeric, data))) < ncol(data)) {
+    stop("All variables in the data frame need to be numeric !")
+  }
+
+  mlist <- c("qtl_bin", "bad_bin", "iso_bin", "gbm_bin")
+  if (method %in% 1:length(mlist)) {
+    source(paste(mlist[method], ".R", sep = ''))
+    bin_fn <- get(mlist[method])
+  } else {
+    stop("The method is not supported !")
+  }
+
   df1 <- subset(data, data[, ncol(data)] %in% c(0, 1))
   xnames <- colnames(df1)[1:(ncol(df1) - 1)]
   yname <- colnames(df1)[ncol(df1)]
-  bin_fn <- get(method)
 
   xlst <- parallel::mclapply(xnames, mc.cores = parallel::detectCores(), 
             function(xname) bin_fn(data.frame(y = df1[[yname]], x = df1[[xname]]), y, x))
@@ -36,5 +48,5 @@ batch_bin <- function(data, method = "mono_bin") {
 }
 
 print.BinSummary <- function(x) {
-  print(x$BinSum)
+  print(knitr::kable(x$BinSum, padding = 2))
 }
