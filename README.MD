@@ -77,7 +77,7 @@ gbm_bin(df, bad, tot_derog)
 # [1]  0  1  2  3  9 14
 ```
 
-As previously demonstrated, above 4 functions can only apply the binning algorithm to 1 independent variable at a time. In order to make them useful in a real-world production environment, we need a wrapper that would allow us to run through hundreds or even thousands of independent variables at once. The function **batch_bin** takes two input parameters, "data" for a data frame with the last column as the dependent variable and "method" for an integer indicating the binning algorithm to be called for. For instance, *batch_bin(df, 1)* will apply the **qtl_bin()** function to all (numeric) independent varaibles in a data frame "df" and generates a summary output as below.
+As previously demonstrated, above 4 functions can only apply the binning algorithm to 1 independent variable at a time. In order to make them useful in a real-world production environment, we need a wrapper that would allow us to run through hundreds or even thousands of independent variables at once. The function **batch_bin** takes two input parameters, "data" for a data frame with the last column as the dependent variable and "method" for an integer indicating the binning algorithm to be called for. For instance, **_batch_bin(df, 1)_** will apply the **qtl_bin()** function to all (numeric) independent varaibles in a data frame "df" and generates a summary output as below.
 ```r
 |var            |  nbin|  unique|  miss|  min|   median|      max|       ks|      iv|
 |:--------------|-----:|-------:|-----:|----:|--------:|--------:|--------:|-------:|
@@ -94,7 +94,7 @@ As previously demonstrated, above 4 functions can only apply the binning algorit
 |tot_income     |     4|    1639|     5|    0|   3400.0|  8147167|   9.1526|  0.0500|
 ```
 
-If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then *batch_bin(df, 1)$BinLst[["tot_income"]]* would deliver the result as below, which is the identical output from *qtl_bin(df, bad, tot_income)*.
+If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then **_batch_bin(df, 1)$BinLst[["tot_income"]]_** would deliver the result as below, which is the identical output from **_qtl_bin(df, bad, tot_income)_**.
 ```r
 # $df
 #  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv     ks
