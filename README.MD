@@ -94,7 +94,7 @@ As previously demonstrated, above 4 functions can only apply the binning algorit
 |tot_income     |     4|    1639|     5|    0|   3400.0|  8147167|   9.1526|  0.0500|
 ```
 
-If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then **batch_bin(df, 1)$BinLst[["tot_income"]]** would deliver the result as below. 
+If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then **batch_bin(df, 1)$BinLst[["tot_income"]]** would deliver the result as below, which is the identical output from **qtl_bin(df, bad, tot_income)**.
 ```r
 # $df
 #  bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv     ks
