@@ -31,7 +31,7 @@ qtl_bin(df, bad, tot_derog)
 # [1] 1 2 4
 ```
 
-2. The function **bad_bin()** is a two-step process and implements a revised version of the iterative discretization. The discretization is driven by the data sample with Y = 1 and the discretization outcome is evaluated across the whole data sample based upon the abovementioned convergence criterion. Compared with **qtl_bin()**, **bad_bin()** would tend to generate a more coarse binning outcome and therefore lower statistics of KS or IV. 
+2. The function **bad_bin()** is a two-step process and implements a revised version of the iterative discretization. The discretization is determined by the data sample with Y = 1 and the discretization outcome is evaluated across the whole data sample based upon the abovementioned convergence criterion. Compared with **qtl_bin()**, **bad_bin()** would tend to generate a more coarse binning outcome and therefore lower statistics of KS or IV. 
 ```r
 bad_bin(df, bad, tot_derog)
 # $df
