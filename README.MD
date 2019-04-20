@@ -20,7 +20,7 @@ install.packages("import")
 import::from("mob.R", qtl_bin) 
 
 str(qtl_bin)
-function (data, y, x)
+# function (data, y, x)
 ```
 (Credits go to https://github.com/VladPerervenko)
 
