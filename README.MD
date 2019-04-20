@@ -157,16 +157,20 @@ head(ltv_woe$df, 1)
 
 The function **batch_woe()** basically is the wrapper around **cal_woe()** with the purpose to allow users to apply WoE transformations to many independent variables simultaneously. The `data` parameter is the data frame that we would deploy binning outcomes and the `slst` parameter is the list of multiple binning specification tables that is either the direct output from the function **batch_bin** or created manually by combining outputs from mutlple binning functions. 
 
-Simlarly, there are also two components in the output of **batch_woe()**, a list of PSI tables for transformed variables and a data frame with a row index and all transformed variables. 
+Simlarly, there are also two components in the output of **batch_woe()**, a list of PSI tables for transformed variables and a data frame with a row index and all transformed variables. The default printout is a PSI summation of input variables to be transformed. 
 ```r
 binout <- batch_bin(df, 1)
 
-woeout <- batch_woe(df[sample(seq(nrow(df)), 1000, replace = T), ], binout$BinLst)
+woeout <- batch_woe(df[sample(seq(nrow(df)), 2000, replace = T), ], binout$BinLst)
+
+woeout 
+#     tot_derog tot_tr age_oldest_tr tot_open_tr tot_rev_tr tot_rev_debt ...
+# psi    0.0027 0.0044        0.0144      0.0011      3e-04       0.0013 ...
 
 str(woeout, max.level = 1)
 # List of 2
 #  $ psi:List of 11
-#  $ df :'data.frame':	1000 obs. of  12 variables:
+#  $ df :'data.frame':	2000 obs. of  12 variables:
 #  - attr(*, "class")= chr "CalSummary"
 
 head(woeout$df, 1)
