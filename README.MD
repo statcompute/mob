@@ -5,7 +5,7 @@ The **MOB** (Monotonic Optimal Binning) package is a collection of R functions t
 
 In addition to monotonic binning and WoE transformation, Information Value and KS statistic of each independent variables are also calculated to evaluate the variable predictiveness. 
 
-In order to be useful in a production environment, the **MOB** package also provides functionalities that would allow users to do batch processing of binning and transformations with many independent variables concurrently in a multi-core computing engine. 
+In order to be useful in a production environment, the package also provides functionalities that would allow users to do batch processing of binning and transformations with many independent variables concurrently in a multi-core computing engine. 
 
 
 #### Package Dependencies
@@ -27,7 +27,7 @@ str(qtl_bin)
 #### Features
 * #### Monotonic Binning & Variable Predictiveness
 
-The function **manual_bin()** is the building block of all monotonic binning algorithms included in the MOB package and will generate the binning outcome based upon a list of cutting points for each numeric attribute. If there is any missing value in the attribute, two different treatments should be considered, depending on the ratio between good and bad accounts. First of all, with only good or only bad accounts in missing values, all cases should be merged into a category with the similar bad rate. Secondly, with both good and bad acounts in missing values, all cases should be treated as a standalone category. In the example shown below, there are 213 cases with missing values in the attribute named "tot_derog" with 70 bad and the rest good accounts. Therefore, all 213 cases are assigned into a separate category with the 32.86% bad rate and the value of WoE = 0.6416. 
+The function **manual_bin()** is the building block of all monotonic binning algorithms included in the package and will generate the binning outcome based upon a list of cutting points for each numeric attribute. If there is any missing value in the attribute, two different treatments should be considered, depending on the ratio between good and bad accounts. First of all, with only good or only bad accounts in missing values, all cases should be merged into a category with the similar bad rate. Secondly, with both good and bad acounts in missing values, all cases should be treated as a standalone category. In the example shown below, there are 213 cases with missing values in the attribute named "tot_derog" with 70 bad and the rest good accounts. Therefore, all 213 cases are assigned into a separate category with the 32.86% bad rate and the value of WoE = 0.6416. 
 
 ```r
 manual_bin(df, "bad", "tot_derog", c(1, 2))
