@@ -11,6 +11,18 @@ In order to be useful in a production environment, the **MOB** package also prov
 #### Package Dependencies
 R version 3.5, base, stats, parallel, Hmisc, gbm
 
+#### Installation
+First of all, download the mob.R file and save it in your computer.
+Next, run following R scripts.
+```r
+install.packages("import")
+
+import::from("mob.R", qtl_bin) 
+
+str(qtl_bin)
+function (data, y, x)
+```
+(Credits go to https://github.com/VladPerervenko)
 
 #### Features
 * #### Monotonic Binning & Variable Predictiveness
