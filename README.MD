@@ -119,3 +119,10 @@ If we are specifically interested in the detailed binning outcome of the attribu
 # $cuts
 # [1] 2570 4510
 ```
+
+
+* #### Binning Deployment & WoE Transformation
+
+After the generation of monotononic binning, it is by all means important to apply these binning outcomes to new datasets that should be used in the model development or deployment. Currently, there are two functions to support the deployment of binning outcomes, including **cal_woe(data, xname, spec)** and **batch_woe(data, slst)**. 
+
+The function cal_woe() takes three input parameters. The `data` parameter is a data frame with the independent variable to which the binning specification should be applied. 
