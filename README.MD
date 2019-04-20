@@ -130,11 +130,23 @@ The function cal_woe() takes three input parameters. The `data` parameter is a d
 There are two components in the output of **cal_woe()**, including a data frame with the PSI (Population Stability Index) summary and another data frame that is the copy of the input data frame with an additional column for the WoE transformation. 
 ```r
 ltv_bin <- qtl_bin(df, bad, ltv)
-ltv_woe <- cal_woe(df, "ltv", ltv_bin$df)
+
+ltv_woe <- cal_woe(df[sample(seq(nrow(df)), 1000, replace = T), ], "ltv", ltv_bin$df)
+
 str(ltv_woe, max.level = 1)
 # List of 2
-#  $ df :'data.frame':	5837 obs. of  13 variables:
+#  $ df :'data.frame':	1000 obs. of  13 variables:
 #  $ psi:'data.frame':	7 obs. of  8 variables:
 #  - attr(*, "class")= chr "psi"
+
+ltv_woe
+#  bin                           rule   dist     woe cal_freq cal_dist cal_woe    psi
+#   01                       $X <= 84 0.1638 -0.7690      177    0.177 -0.7690 0.0010
+#   02             $X > 84 & $X <= 93 0.1645 -0.3951      143    0.143 -0.3951 0.0030
+#   03             $X > 93 & $X <= 99 0.1501  0.0518      154    0.154  0.0518 0.0001
+#   04            $X > 99 & $X <= 103 0.1407  0.0787      125    0.125  0.0787 0.0019
+#   05           $X > 103 & $X <= 109 0.1324  0.1492      149    0.149  0.1492 0.0020
+#   06           $X > 109 & $X <= 117 0.1237  0.3263      133    0.133  0.3263 0.0007
+#   07           $X > 117 | is.na($X) 0.1249  0.5041      119    0.119  0.5041 0.0003
 
 ```
