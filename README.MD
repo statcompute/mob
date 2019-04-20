@@ -9,7 +9,7 @@ In order to be useful in a production environment, the **MOB** package also prov
 
 
 #### Package Dependencies
-parallel, Hmisc, gbm
+R version 3.5, base, stats, parallel, Hmisc, gbm
 
 
 #### Features
