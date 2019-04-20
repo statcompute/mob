@@ -87,7 +87,7 @@ gbm_bin(df, bad, tot_derog)
 # [1]  0  1  2  3  9 14
 ```
 
-As previously demonstrated, above 4 functions can apply the binning algorithm to 1 independent variable at a time. However, in a real-world model development environment, we often need to apply the binning algorithm to hundreds or even thousands of independent variables. As a result, we also want a wrapper around each binning algorithm that allows us to run through many variables at once and, more importantly, that distributes the computational task across multiple CPUs in a cutting-edge computing server. 
+As previously demonstrated, above 4 functions can apply the binning algorithm to 1 independent variable at a time. However, in a real-world model development environment, we often need to apply the binning algorithm to hundreds or even thousands of independent variables. As a result, we also want a wrapper around each binning algorithm that allows us to run through many variables at once and, more importantly, that distributes the computational task across multiple CPUs in a contemporary computing server or workstation.
 
 The function **batch_bin()** takes two input parameters, "data" for a data frame with the last column as the dependent variable and "method" for an integer indicating the binning algorithm to be called for. For instance, **batch_bin(df, 1)** will apply the **qtl_bin()** function to all (numeric) independent varaibles in a data frame "df" and generates a summary output as below.
 ```r
