@@ -91,19 +91,19 @@ As previously demonstrated, above 4 functions can apply the binning algorithm to
 
 The function **batch_bin()** takes two input parameters, "data" for a data frame with the last column as the dependent variable and "method" for an integer indicating the binning algorithm to be called for. For instance, **batch_bin(df, 1)** will apply the **qtl_bin()** function to all (numeric) independent varaibles in a data frame "df" and generates a summary output as below.
 ```r
-|var            |  nbin|  unique|  miss|  min|   median|      max|       ks|      iv|
-|:--------------|-----:|-------:|-----:|----:|--------:|--------:|--------:|-------:|
-|tot_derog      |     5|      29|   213|    0|      0.0|       32|  18.9469|  0.2055|
-|tot_tr         |     5|      67|   213|    0|     16.0|       77|  15.7052|  0.1302|
-|age_oldest_tr  |    10|     460|   216|    1|    137.0|      588|  19.9821|  0.2539|
-|tot_open_tr    |     3|      26|  1416|    0|      5.0|       26|   6.7157|  0.0240|
-|tot_rev_tr     |     3|      21|   636|    0|      3.0|       24|   9.0104|  0.0717|
-|tot_rev_debt   |     3|    3880|   477|    0|   3009.5|    96260|   8.5102|  0.0627|
-|tot_rev_line   |     9|    3617|   477|    0|  10573.0|   205395|  26.4924|  0.4077|
-|rev_util       |     2|     101|     0|    0|     30.0|      100|  15.1570|  0.0930|
-|bureau_score   |    12|     315|   315|  443|    692.5|      848|  34.8028|  0.7785|
-|ltv            |     7|     145|     1|    0|    100.0|      176|  15.6254|  0.1538|
-|tot_income     |     4|    1639|     5|    0|   3400.0|  8147167|   9.1526|  0.0500|
+#|var            |  nbin|  unique|  miss|  min|   median|      max|       ks|      iv|
+#|:--------------|-----:|-------:|-----:|----:|--------:|--------:|--------:|-------:|
+#|tot_derog      |     5|      29|   213|    0|      0.0|       32|  18.9469|  0.2055|
+#|tot_tr         |     5|      67|   213|    0|     16.0|       77|  15.7052|  0.1302|
+#|age_oldest_tr  |    10|     460|   216|    1|    137.0|      588|  19.9821|  0.2539|
+#|tot_open_tr    |     3|      26|  1416|    0|      5.0|       26|   6.7157|  0.0240|
+#|tot_rev_tr     |     3|      21|   636|    0|      3.0|       24|   9.0104|  0.0717|
+#|tot_rev_debt   |     3|    3880|   477|    0|   3009.5|    96260|   8.5102|  0.0627|
+#|tot_rev_line   |     9|    3617|   477|    0|  10573.0|   205395|  26.4924|  0.4077|
+#|rev_util       |     2|     101|     0|    0|     30.0|      100|  15.1570|  0.0930|
+#|bureau_score   |    12|     315|   315|  443|    692.5|      848|  34.8028|  0.7785|
+#|ltv            |     7|     145|     1|    0|    100.0|      176|  15.6254|  0.1538|
+#|tot_income     |     4|    1639|     5|    0|   3400.0|  8147167|   9.1526|  0.0500|
 ```
 
 If we are specifically interested in the detailed binning outcome of the attribute "tot_income", then **batch_bin(df, 1)$BinLst[["tot_income"]]** would deliver the result as below, which is the identical output from **qtl_bin(df, bad, tot_income)**.
