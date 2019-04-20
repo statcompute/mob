@@ -5,6 +5,8 @@ The **MOB** (Monotonic Optimal Binning) package is a collection of R functions t
 
 In addition to monotonic binning and WoE transformation, Information Value and KS statistic of each independent variables are also calculated to evaluate the variable predictiveness. 
 
+In order to be useful in a production environment, the **MOB** package also provides functionalities that would allow users to do batch processing of binning and transformations with many independent variables concurrently in the multi-core computing environment. 
+
 
 #### Package Dependencies
 parallel, Hmisc, gbm
