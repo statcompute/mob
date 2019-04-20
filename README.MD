@@ -12,8 +12,7 @@ In order to be useful in a production environment, the **MOB** package also prov
 R version 3.5, base, stats, parallel, Hmisc, gbm
 
 #### Installation
-First of all, download the mob.R file and save it in your computer.
-Next, run following R scripts.
+Download the mob.R file, save it in your computer, and then run following R scripts.
 ```r
 install.packages("import")
 
