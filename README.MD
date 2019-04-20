@@ -13,7 +13,7 @@ R version 3.5, base, stats, parallel, Hmisc, gbm
 
 #### Installation
 Download the mob.R file, save it in your computer, and then run following R scripts.
-(Thanks to the suggestion provided by [Vlad Perervenko](https://github.com/VladPerervenko). 
+( Thanks to the suggestion provided by [Vlad Perervenko](https://github.com/VladPerervenko) ). 
 ```r
 install.packages("import")
 
