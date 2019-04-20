@@ -13,6 +13,7 @@ R version 3.5, base, stats, parallel, Hmisc, gbm
 
 #### Installation
 Download the mob.R file, save it in your computer, and then run following R scripts.
+(Thanks to the suggestion provided by [Vlad Perervenko](https://github.com/VladPerervenko). 
 ```r
 install.packages("import")
 
@@ -21,7 +22,7 @@ import::from("mob.R", qtl_bin)
 str(qtl_bin)
 # function (data, y, x)
 ```
-(Credits go to https://github.com/VladPerervenko)
+
 
 #### Features
 * #### Monotonic Binning & Variable Predictiveness
