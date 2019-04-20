@@ -171,7 +171,7 @@ str(woeout, max.level = 1)
 # List of 2
 #  $ psi:List of 11
 #  $ df :'data.frame':	2000 obs. of  12 variables:
-#  - attr(*, "class")= chr "CalSummary"
+#  - attr(*, "class")= chr "psiSummary"
 
 head(woeout$df, 1)
 #  idx_ woe.tot_derog woe.tot_tr woe.age_oldest_tr woe.tot_open_tr woe.tot_rev_tr ...
