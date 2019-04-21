@@ -172,7 +172,7 @@ head(ltv_woe$df, 1)
 # ...          667  83       2500   1  -0.769
 ```
 
-2. The function **batch_woe()** basically is the wrapper around **cal_woe()** with the purpose to allow users to apply WoE transformations to many independent variables simultaneously. The `data` parameter is the data frame that we would deploy binning outcomes and the `slst` parameter is the list of multiple binning specification tables that is either the direct output from the function **batch_bin** or created manually by combining outputs from multiple binning functions. 
+2. The function **batch_woe()** basically is the wrapper around **cal_woe()** with the purpose to allow users to apply WoE transformations to many independent variables simultaneously. The `data` parameter is the data frame that we would deploy binning outcomes and the `slst` parameter is the list of multiple binning specification tables that is either the direct output from the function **batch_bin()** or created manually by combining outputs from multiple binning functions. 
 Simlarly, there are also two components in the output of **batch_woe()**, a list of PSI tables for transformed variables and a data frame with a row index and all transformed variables. The default printout is a PSI summation of all input variables to be transformed. As shown below, all PSI values are below 0.1 and therefore none is concerning. 
   
 ```r
