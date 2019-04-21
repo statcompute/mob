@@ -12,17 +12,23 @@ In order to be useful in a production environment, the package also provides fun
 R version 3.5, base, stats, parallel, Hmisc, gbm
 
 #### Installation
-Download the [mob.R](https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/mob.R) file, save it in your computer, and then run following R scripts.
+Download the [mob.R](https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/mob.R) file and save it in your computer.
+
+If you want to load specific functions (or a function) from the "mob.R" file, the import::from() should work.
 ( Thanks to the suggestion provided by [Vlad Perervenko](https://github.com/VladPerervenko) ). 
 ```r
-install.packages("import")
-
 import::from("mob.R", qtl_bin) 
 
 str(qtl_bin)
 # function (data, y, x)
 ```
+Alternatively, if you just want to load all functions into the current environment, the source() is the solution. 
+```r
+source("mob.R")
 
+ls()
+#"bad_bin" "batch_bin" "batch_woe" "cal_woe" "gbm_bin" "iso_bin" "manual_bin" "print.BinSummary" "print.psi"   "print.psiSummary" "qtl_bin" 
+```
 
 #### Features
 * #### Monotonic Binning & Variable Predictiveness
