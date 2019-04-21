@@ -22,12 +22,12 @@ import::from("mob.R", qtl_bin)
 str(qtl_bin)
 # function (data, y, x)
 ```
-Alternatively, if you just want to load all functions into the current environment, the source() is the solution. 
+Alternatively, if you just want to load all functions into the current environment, the source() is simple enough to get you started. 
 ```r
 source("mob.R")
 
 ls()
-#"bad_bin" "batch_bin" "batch_woe" "cal_woe" "gbm_bin" "iso_bin" "manual_bin" "print.BinSummary" "print.psi"   "print.psiSummary" "qtl_bin" 
+#"bad_bin" "batch_bin" "batch_woe" "cal_woe" "gbm_bin" "iso_bin" "manual_bin" "print.BinSummary" "print.psi" "print.psiSummary" "qtl_bin" 
 ```
 
 #### Features
