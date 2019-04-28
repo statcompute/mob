@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" height="200" src="https://github.com/statcompute/MonotonicBinning/blob/master/data/mob.jpeg">
+  <img width="150" height="100" src="https://github.com/statcompute/MonotonicBinning/blob/master/data/mob.jpeg">
 </p>
 
 ### <p align="center"> Monotonic Optimal Binning (MOB) </p>
