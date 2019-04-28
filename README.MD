@@ -1,4 +1,4 @@
- <p align="center"> ![](data/mob.jpeg)</p>
+ ![] <p align="center"> (data/mob.jpeg) </p>
 
 ### <p align="center"> Monotonic Optimal Binning (MOB) </p>
 ### <p align="center">  for Consumer Credit Risk Scorecard Development </p>
