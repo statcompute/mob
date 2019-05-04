@@ -17,7 +17,7 @@ I had been asked why I spent so much effort on writing SAS macros and R function
 
 The WoE transformation through monotonic binning provides a convenient way to address each of aforementioned concerns. 
 
-1. Because WoE is a piece-wise transformation based on the data discretization, all missing values would fall into a standalone category either by itself or to be combined with the neighbor with a similar bad rate. As a result, the special treatment for missing values is not necessary. 
+1. Because WoE is a piecewise transformation based on the data discretization, all missing values would fall into a standalone category either by itself or to be combined with the neighbor with a similar bad rate. As a result, the special treatment for missing values is not necessary. 
 
 2. After the monotonic binning of each variable, since the WoE value for each bin is a projection from the predictor into the response that is defined by the log ratio between event and non-event distributions, any raw value of the predictor doesn’t matter anymore and therefore the issue related to outliers  would disappear. 
 
