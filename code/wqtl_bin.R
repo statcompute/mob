@@ -1,5 +1,5 @@
 wqtl_bin <- function(data, y, x, w) {
-# INPUT
+# input
 # data: input dataframe
 # y   : name of Y in the input dataframe with 0/1 binary values
 # x   : name of X in the input dataframe with numeric values
@@ -16,9 +16,9 @@ wqtl_bin <- function(data, y, x, w) {
     pts <- Hmisc::cut2(df1[[xname]], g = nbin + 1, onlycuts = T)
     df1$cut <- cut(df1[[xname]], breaks = pts, include.lowest = T)
     df2 <- Reduce(rbind, 
-             Map(function(x) data.frame(xmean = mean(x[[xname]]), 
-                                        wmean = weighted.mean(x[[yname]], x[[wname]]),
-                                        ymean = mean(x[[yname]])), 
+             Map(function(x_) data.frame(xmean = mean(x_[[xname]]), 
+                                         wmean = weighted.mean(x_[[yname]], x_[[wname]]),
+                                         ymean = mean(x_[[yname]])), 
                split(df1, df1$cut)))
 
     flg1 <- ifelse(round(abs(cor(df2$xmean, df2$wmean, method = "spearman", use = "complete.obs")), 8) < 1, 1, 0)
@@ -35,13 +35,13 @@ wqtl_bin <- function(data, y, x, w) {
   woe <- cal_woe(cbind(idx_ = seq(nrow(data)), data), xname, bin)
  
   df3 <- Reduce(rbind, 
-           Map(function(x) data.frame(bin      = x[1, "woe.bin"],
-                                      rule     = subset(bin, bin == x[1, "woe.bin"])[["rule"]],
-                                      cnt      = nrow(x),
-                                      freq     = round(sum(x[[wname]]), 2),
-                                      dist     = round(sum(x[[wname]]) / sum(woe$df[[wname]]), 4),
-                                      mv_wt    = round(sum(subset(x, is.na(x[[xname]]))[[wname]]), 2),
-                                      bad_freq = round(sum(subset(x, x[[yname]] == 1)[[wname]]), 2)),
+           Map(function(x_) data.frame(bin      = x_[1, "woe.bin"],
+                                       rule     = subset(bin, bin == x_[1, "woe.bin"])[["rule"]],
+                                       cnt      = nrow(x_),
+                                       freq     = round(sum(x_[[wname]]), 2),
+                                       dist     = round(sum(x_[[wname]]) / sum(woe$df[[wname]]), 4),
+                                       mv_wt    = round(sum(subset(x_, is.na(x_[[xname]]))[[wname]]), 2),
+                                       bad_freq = round(sum(subset(x_, x_[[yname]] == 1)[[wname]]), 2)),
              split(woe$df, woe$df[["woe.bin"]])))
 
   df3$bad_rate <- round(df3$bad_freq / df3$freq, 4)
