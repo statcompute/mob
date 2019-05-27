@@ -9,6 +9,7 @@
 
 * [Introduction](#introduction)
 * [Installation](#installation)
+* [Package Dependencies](#dependency)
 
 #### <a name="introduction"></a>Introduction
 
@@ -31,11 +32,11 @@ The WoE transformation through monotonic binning provides a convenient way to ad
 
 4. At last, because the WoE is defined as the log ratio between event and non-event distributions, it is indicative of the separation between cases with Y = 0 and cases with Y = 1. As the weighted sum of WoE values with the weight being the difference in event and non-event distributions, the IV (Information Value) is an important statistic commonly used to measure the predictor importance.
 
-#### Package Dependencies
+#### <a name="dependency"></a>Package Dependencies
 R version 3.6, base, stats, parallel, Hmisc, gbm
 
-#### Installation
 #### <a name="installation"></a>Installation
+
 Download the [mob.R](https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/mob.R) file and save it in your computer.
 
 If you want to load specific functions (or a function) from the "mob.R" file, the import::from() should work.
