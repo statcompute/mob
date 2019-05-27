@@ -5,6 +5,9 @@
 ### <p align="center"> Monotonic Optimal Binning (MOB) </p>
 ### <p align="center">  for Consumer Credit Risk Scorecard Development </p>
 
+#### [Introduction](https://github.com/statcompute/MonotonicBinning#introduction)
+
+#### [Why Use Weight of Evidence](https://github.com/statcompute/MonotonicBinning#why-use-weight-of-evidence)
 
 
 #### Introduction
