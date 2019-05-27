@@ -12,6 +12,7 @@
 * [Package Dependencies](#dependency)
 * [Installation](#installation)
 * [Features](#features)
+* [Example](#example)
 
 
 #### <a name="introduction"></a> Introduction
@@ -225,3 +226,64 @@ head(woeout$df, 1)
 #  idx_ woe.tot_derog woe.tot_tr woe.age_oldest_tr woe.tot_open_tr woe.tot_rev_tr ...
 #     1       -0.3811    -0.0215           -0.5356         -0.0722        -0.1012 ...
 ```
+
+#### <a name="example"></a> Example
+
+Below is a simple example showing how to use WoE transformations in the estimation of a logistic regression. 
+
+```r
+df <- readRDS("df.rds")
+### SHOWING THE RESPONSE IN THE LAST COLUMN ###
+head(df, 2)  
+#tot_derog tot_tr age_oldest_tr tot_open_tr tot_rev_tr tot_rev_debt tot_rev_line rev_util bureau_score ltv tot_income bad
+#        6      7            46         NaN        NaN          NaN          NaN        0          747 109    4800.00   0
+#        0     21           153           6          1           97         4637        2          744  97    5833.33   0
+
+source("mob.R")
+bin_out <- batch_bin(df, 3)
+bin_out$BinSum
+#           var nbin unique miss min  median     max      ks     iv
+#     tot_derog    7     29  213   0     0.0      32 20.0442 0.2599
+#        tot_tr   15     67  213   0    16.0      77 17.3002 0.1425
+# ......
+
+top <- paste(bin_out$BinSum[order(bin_out$BinSum[["iv"]], decreasing = T), ][1:6, "var"], sep = '')
+par(mfrow = c(2, 3))
+lapply(top, function(x) plot(bin_out$BinLst[[x]]$df[["woe"]], 
+                             log(bin_out$BinLst[[x]]$df[["bad_rate"]] / (1 - bin_out$BinLst[[x]]$df[["bad_rate"]])), 
+                             type = "b", main = x, cex.main = 2, xlab = paste("woe of", x), ylab = "logit(bad)", cex = 2, col = "red"))
+
+df_woe <- batch_woe(df, bin_out$BinLst)
+str(df_woe$df)
+#'data.frame':	5837 obs. of  12 variables:
+# $ idx_             : int  1 2 3 4 5 6 7 8 9 10 ...
+# $ woe.tot_derog    : num  0.656 -0.556 -0.556 0.274 0.274 ...
+# $ woe.tot_tr       : num  0.407 -0.322 -0.4 -0.322 0.303 ...
+# ......
+
+### PARSE VARIABLES WITH IV > 0.1 ###
+x1 <- paste("woe", bin_out$BinSum[bin_out$BinSum[["iv"]] > 0.1, ]$var, sep = ".")
+# "woe.tot_derog" "woe.tot_tr" "woe.age_oldest_tr" "woe.tot_rev_line" "woe.rev_util" "woe.bureau_score" "woe.ltv" 
+
+fml1 <- as.formula(paste("bad", paste(x1, collapse = " + "), sep = " ~ "))
+
+sum1 <- summary(glm(fml1, data = cbind(bad = df$bad, df_woe$df), family = "binomial"))
+
+### PARSE SIGNIFICANT VARIABLES WITH P-VALUE < 0.05 ###
+x2 <- paste(row.names(sum1$coefficients)[sum1$coefficients[, 4] < 0.05][-1])
+# "woe.age_oldest_tr" "woe.tot_rev_line" "woe.rev_util" "woe.bureau_score" "woe.ltv" 
+
+fml2 <- as.formula(paste("bad", paste(x2, collapse = " + "), sep = " ~ "))
+
+mdl2 <- glm(fml2, data = cbind(bad = df$bad, df_woe$df), family = "binomial")
+#                  Estimate Std. Error z value Pr(>|z|)    
+#(Intercept)       -1.38600    0.03801 -36.461  < 2e-16 ***
+#woe.age_oldest_tr  0.30376    0.08176   3.715 0.000203 ***
+#woe.tot_rev_line   0.42935    0.06793   6.321 2.61e-10 ***
+#woe.rev_util       0.29150    0.08721   3.342 0.000831 ***
+#woe.bureau_score   0.83568    0.04974  16.803  < 2e-16 ***
+#woe.ltv            0.97789    0.09121  10.721  < 2e-16 ***
+```
+<p align="center">
+  <img width="800" height="400" src="https://github.com/statcompute/MonotonicBinning/blob/master/data/top6.png">
+</p>
