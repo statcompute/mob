@@ -13,6 +13,7 @@
 
 ##### [Installation](#installation)
 
+<a name="introduction"></a>
 #### Introduction
 The **MOB** (Monotonic Optimal Binning) package is a collection of R functions that would generate the monotonic binning and perform the WoE (Weight of Evidence) transformation used in consumer credit scorecard developments. Being a piecewise constant transformation in the context of logistic regressions, the WoE has also been employed in other use cases, such as consumer credit loss estimation, prepayment, and even fraud detection models.  
 
