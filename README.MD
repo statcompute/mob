@@ -5,15 +5,6 @@
 ### <p align="center"> Monotonic Optimal Binning (MOB) </p>
 ### <p align="center">  for Consumer Credit Risk Scorecard Development </p>
 
-##### [Introduction](#introduction)
-
-##### [Why Use Weight of Evidence](https://github.com/statcompute/MonotonicBinning#why-use-weight-of-evidence)
-
-##### [Package Dependencies](https://github.com/statcompute/MonotonicBinning#package-dependencies)
-
-##### [Installation](#installation)
-
-<a name="introduction"></a>
 #### Introduction
 The **MOB** (Monotonic Optimal Binning) package is a collection of R functions that would generate the monotonic binning and perform the WoE (Weight of Evidence) transformation used in consumer credit scorecard developments. Being a piecewise constant transformation in the context of logistic regressions, the WoE has also been employed in other use cases, such as consumer credit loss estimation, prepayment, and even fraud detection models.  
 
@@ -35,9 +26,8 @@ The WoE transformation through monotonic binning provides a convenient way to ad
 4. At last, because the WoE is defined as the log ratio between event and non-event distributions, it is indicative of the separation between cases with Y = 0 and cases with Y = 1. As the weighted sum of WoE values with the weight being the difference in event and non-event distributions, the IV (Information Value) is an important statistic commonly used to measure the predictor importance.
 
 #### Package Dependencies
-R version 3.5, base, stats, parallel, Hmisc, gbm
+R version 3.6, base, stats, parallel, Hmisc, gbm
 
-<a name="Installation"></a>
 #### Installation
 Download the [mob.R](https://raw.githubusercontent.com/statcompute/MonotonicBinning/master/code/mob.R) file and save it in your computer.
 
