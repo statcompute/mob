@@ -8,10 +8,11 @@
 #### Table of Contents
 
 * [Introduction](#introduction)
-* [Installation](#installation)
+* [Why Use Weight of Evidence](#why)
 * [Package Dependencies](#dependency)
+* [Installation](#installation)
 
-#### <a name="introduction"></a>Introduction
+#### <a name="introduction"></a> Introduction
 
 The **MOB** (Monotonic Optimal Binning) package is a collection of R functions that would generate the monotonic binning and perform the WoE (Weight of Evidence) transformation used in consumer credit scorecard developments. Being a piecewise constant transformation in the context of logistic regressions, the WoE has also been employed in other use cases, such as consumer credit loss estimation, prepayment, and even fraud detection models.  
 
@@ -19,7 +20,8 @@ In addition to monotonic binning and WoE transformation, Information Value and K
 
 In order to be useful in a production environment, the package also provides functionalities that would allow users to do batch processing of binning and transformations with many independent variables concurrently in a multi-core computing engine. 
 
-#### Why Use Weight of Evidence
+#### <a name="why"></a> Why Use Weight of Evidence
+
 I had been asked why I spent so much effort on writing SAS macros and R functions to do monotonic binning for the WoE transformation, given the availability of other cutting-edge data mining or deep learning algorithms that will automatically generate the prediction with whatever predictors fed in the model. About 10 years ago when I worked in the decision science team of Chase, I was once told that even an idiot knows how to put X on the right-hand side of an equal sign. Nonetheless, what really distinguishes a good modeler from the rest is how to handle challenging data issues, including missing values, outliers, linearity, and predictability, in a scalable way that can be rolled out to hundreds or even thousands of potential model drivers in the production environment. 
 
 The WoE transformation through monotonic binning provides a convenient way to address each of aforementioned concerns. 
