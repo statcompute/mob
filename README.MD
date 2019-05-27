@@ -11,6 +11,8 @@
 * [Why Use Weight of Evidence](#why)
 * [Package Dependencies](#dependency)
 * [Installation](#installation)
+* [Features](#features)
+
 
 #### <a name="introduction"></a> Introduction
 
@@ -58,7 +60,8 @@ ls()
 # "print.BinSummary" "print.psi" "print.psiSummary" "qtl_bin" 
 ```
 
-#### Features
+#### <a name="features"></a> Features
+
 * #### Monotonic Binning & Variable Predictiveness
 
 The function **manual_bin()** is the building block of all monotonic binning algorithms included in the package and will generate the binning outcome based upon a list of cutting points for each numeric attribute. If there is any missing value in the attribute, two different treatments should be considered, depending on the ratio between good and bad accounts. First of all, with only good or only bad accounts in missing values, all cases should be merged into a category with the similar bad rate. Secondly, with both good and bad acounts in missing values, all cases should be treated as a standalone category. In the example shown below, there are 213 cases with missing values in the attribute named "tot_derog" with 70 bad and the rest good accounts. Therefore, all 213 cases are assigned into a separate category with the 32.86% bad rate and the value of WoE = 0.6416. 
