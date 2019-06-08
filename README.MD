@@ -39,7 +39,7 @@ The WoE transformation through monotonic binning provides a convenient way to ad
 
 #### <a name="dependency"></a>Package Dependencies
 R version 3.6, base, stats, parallel, gbm
-- removed the dependency on Hmisc
+06/08/2019 - removed the dependency on Hmisc
 
 #### <a name="installation"></a>Installation
 
