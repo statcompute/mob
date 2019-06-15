@@ -8,7 +8,7 @@ qtl_bin <- function(data, y, x) {
   xname <- deparse(substitute(x))
   df1 <- subset(data, !is.na(data[[xname]]) & data[[yname]] %in% c(0, 1), select = c(xname, yname))
   pt0 <- unique(Map(function(n_) unique(quantile(df1[[xname]], prob = seq(0, 1, 1 / n_), names = F, type = 3)),
-                    2:min(15, length(unique(df1[[xname]])))))
+                    2:min(50, length(unique(df1[[xname]])))))
   pts <- pt0[which(Map(length, pt0) > 2)]
   cut <- Map(function(p_) cut(df1[[xname]], breaks = p_, include.lowest = T, labels = F), pts)
   mns <- Map(function(c_) Reduce(rbind, Map(function(d_) data.frame(xmn = mean(d_[[xname]]), ymn = mean(d_[[yname]])),
