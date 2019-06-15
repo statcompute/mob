@@ -3,40 +3,20 @@ bad_bin <- function(data, y, x) {
 # data: input dataframe
 # y   : name of Y in the input dataframe with 0/1 binary values
 # x   : name of X in the input dataframe with numeric values
-# OUTPUT
-# bads_bin(df, bad, ltv)
-# $df
-#   bin                           rule freq   dist mv_cnt bad_freq bad_rate     woe     iv      ks
-#    01                       $X <= 91 1651 0.2829      0      201   0.1217 -0.6201 0.0895 14.4372
-#   ...SKIPPED...
-#    07           $X > 121 | is.na($X)  501 0.0858      1      153   0.3054  0.5342 0.0283  0.0000
-# $cuts
-# [1]  91  98 102 107 113 121
 
   yname <- deparse(substitute(y))
   xname <- deparse(substitute(x))
   df1 <- subset(data, !is.na(data[[xname]]) & data[[yname]] %in% c(0, 1), select = c(xname, yname))
   df2 <- subset(df1, df1[[yname]] == 1)
-  nbin <- 2
-
-  repeat {
-    pts <- Hmisc::cut2(df2[[xname]], g = nbin + 1, onlycuts = T)
-    df1$cut <- cut(df1[[xname]], breaks = pts, include.lowest = T)
-    df3 <- Reduce(rbind, 
-             Map(function(x) data.frame(xmean = mean(x[[xname]]), 
-			                ymean = mean(x[[yname]])), 
-               split(df1, df1$cut)))
-
-    flg1 <- ifelse(round(abs(cor(df3$xmean, df3$ymean, method = "spearman", use = "complete.obs")), 8) < 1, 1, 0)
-    flg2 <- ifelse(max(df3$ymean) == 1 | min(df3$ymean) == 0, 1, 0)
-
-    if((flg1 + flg2) > 0) {
-      cuts <- Hmisc::cut2(df2[[xname]], g = nbin, onlycuts = T)
-      break
-    }
-    nbin <- nbin + 1
-  }
-
-  return(list(df   = manual_bin(data, yname, xname, cuts = cuts[2:(length(cuts) - 1)]),
-              cuts = cuts[2:(length(cuts) - 1)]))
+  pt0 <- unique(Map(function(n_) unique(quantile(df2[[xname]], prob = seq(0, 1, 1 / n_), names = F, type = 3)),
+                    2:min(50, length(unique(df2[[xname]])))))
+  pts <- pt0[which(Map(length, pt0) > 2)]
+  cut <- Map(function(p_) cut(df1[[xname]], breaks = p_, include.lowest = T, labels = F), pts)
+  mns <- Map(function(c_) Reduce(rbind, Map(function(d_) data.frame(xmn = mean(d_[[xname]]), ymn = mean(d_[[yname]])),
+                                            split(df1, c_))), cut)
+  chk <- Reduce(rbind, Map(function(s_) data.frame(scor = round(abs(cor(s_$ymn, s_$xmn, method = "spearman", use = "complete.obs")), 8),
+                                                   rcnt = nrow(s_), miny = min(s_$ymn), maxy = max(s_$ymn)), mns))
+  sel <- tail(subset(cbind(chk, pts = I(pts)), scor == 1 & miny > 0 & maxy < 1), 1)$pts[[1]]
+  return(list(df   = manual_bin(data, yname, xname, cuts = sel[2:(length(sel) - 1)]),
+              cuts = sel[2:(length(sel) - 1)]))
 }
