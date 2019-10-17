@@ -3,7 +3,7 @@
 </p>
 
 ### <p align="center"> Monotonic Optimal Binning (MOB) </p>
-### <p align="center">  for Consumer Credit Risk Scorecard Development </p>
+### <p align="center">  for Risk Scorecard Development </p>
 
 #### Table of Contents
 
