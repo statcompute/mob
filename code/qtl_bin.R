@@ -11,7 +11,7 @@
 #' @examples 
 #' qtl_bin(df, bad, majordrg)
 
-qtl_bin_test <- function(data, y, x) {
+qtl_bin <- function(data, y, x) {
   yname <- deparse(substitute(y))
   xname <- deparse(substitute(x))  
   df1 <- subset(data, !is.na(data[[xname]]) & data[[yname]] %in% c(0, 1), select = c(xname, yname))
