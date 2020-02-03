@@ -38,9 +38,7 @@ The WoE transformation through monotonic binning provides a convenient way to ad
 4. At last, because the WoE is defined as the log ratio between event and non-event distributions, it is indicative of the separation between cases with Y = 0 and cases with Y = 1. As the weighted sum of WoE values with the weight being the difference in event and non-event distributions, the IV (Information Value) is an important statistic commonly used to measure the predictor importance.
 
 #### <a name="dependency"></a>Package Dependencies
-R version 3.6, base, stats, parallel, gbm
-
-06/08/2019 - removed the dependency on Hmisc
+R version 3.6, base, stats, parallel, gbm, Hmisc
 
 #### <a name="installation"></a>Installation
 
