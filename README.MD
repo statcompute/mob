@@ -35,7 +35,7 @@ R (>= 3.3.3), stats, gbm, Rborist
 
 #### Installation
 
-Download the [mob_0.2.0.tar.gz] (https://github.com/statcompute/mob/blob/master/mob_0.2.0.tar.gz) file and then run:
+Download the [mob_0.2.0.tar.gz](https://github.com/statcompute/mob/blob/master/mob_0.2.0.tar.gz) file and then run:
 
 ```r
 install.packages("mob_0.2.0.tar.gz", repos = NULL, type = "source")
