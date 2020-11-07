@@ -60,8 +60,7 @@ mob
   |-- arb_bin()   : The discretization algorthm based on the decision tree.
   |-- cal_woe()   : Applies the WoE transformation to a numeric vector based on the binning outcome.
   |-- batch_bin() : Discretizes vectors in a dataframe.
-  |-- batch_woe() : Applies WoE transformaton to vectors in the dataframe.
-  `-- get_data()  : Loads the testing dataset.
+  `-- batch_woe() : Applies WoE transformaton to vectors in the dataframe.
 ```  
   
 #### Example  
