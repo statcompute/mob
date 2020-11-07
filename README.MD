@@ -47,3 +47,59 @@ Alternatively, you can also install the package from CRAN directly by running:
 ```r
 install.packages("mob")
 ```
+
+#### Functions
+mob
+  |-- qtl_bin()   : The iterative discretization based on quantiles of X.
+  |-- bad_bin()   : The revised iterative discretization for records with Y = 1.
+  |-- iso_bin()   : The discretization algorthm driven by the isotonic regression between X and Y.
+  |-- rng_bin()   : The revised iterative discretization based on the equal-width range of X.
+  |-- kmn_bin()   : The discretization algorthm based on the kmean clustering of X.
+  |-- gbm_bin()   : The discretization algorthm based on the gradient boosting machine.
+  |-- arb_bin()   : The discretization algorthm based on the decision tree.
+  |-- cal_woe()   : Applies the WoE transformation to a numeric vector based on the binning outcome.
+  |-- batch_bin() : Discretizes vectors in a dataframe.
+  |-- batch_woe() : Applies WoE transformaton to vectors in the dataframe.
+  `-- get_data()  : Loads the testing dataset.
+  
+  
+#### Example  
+
+```r
+# get data
+data(hmeq, package = "mob")
+
+# discretize selected variables
+bin_result <- mob::batch_bin(hmeq$BAD, hmeq[, c("DELINQ", "NINQ", "CLAGE")])
+
+# binning summary
+bin_result$bin_sum
+#   var nbin freq bads miss     iv    ks
+#DELINQ    7 5960 1189  580 0.6815 30.93
+#  NINQ    7 5960 1189  510 0.1749 15.63
+# CLAGE   24 5960 1189  308 0.2697 21.43
+
+# binning outcome for DELINQ
+bin_result$bin_out$DELINQ
+#$cut
+#[1] 0 1 2 3 4
+#$tbl
+#  bin freq miss bads   rate     woe     iv    ks               rule
+#1   0  580  580   72 0.1241 -0.5644 0.0259  4.59         is.na($X$)
+#2   1 4179    0  583 0.1395 -0.4299 0.1132 30.93           $X$ <= 0
+#3   2  654    0  222 0.3394  0.7237 0.0696 21.31 $X$ > 0 & $X$ <= 1
+#4   3  250    0  112 0.4480  1.1807 0.0771 14.79 $X$ > 1 & $X$ <= 2
+#5   4  129    0   71 0.5504  1.5917 0.0757 10.03 $X$ > 2 & $X$ <= 3
+#6   5   78    0   46 0.5897  1.7523 0.0560  6.83 $X$ > 3 & $X$ <= 4
+#7   6   90    0   83 0.9222  3.8624 0.2640  0.00            $X$ > 4
+
+# apply WoE transformation
+woe_out <- mob::batch_woe(hmeq, bin_result$bin_out)
+
+# transformed variables
+head(woe_out, 3)
+#   DELINQ    NINQ  CLAGE
+#1 -0.4299 -0.0626 0.3081
+#2  1.1807 -0.2954 0.3081
+#3 -0.4299 -0.0626 0.2780
+```
