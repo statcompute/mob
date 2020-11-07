@@ -49,6 +49,7 @@ install.packages("mob")
 ```
 
 #### Functions
+```
 mob
   |-- qtl_bin()   : The iterative discretization based on quantiles of X.
   |-- bad_bin()   : The revised iterative discretization for records with Y = 1.
@@ -61,7 +62,7 @@ mob
   |-- batch_bin() : Discretizes vectors in a dataframe.
   |-- batch_woe() : Applies WoE transformaton to vectors in the dataframe.
   `-- get_data()  : Loads the testing dataset.
-  
+```  
   
 #### Example  
 
